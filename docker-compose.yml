@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  mongodb_container:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_CREATE_TOPICS: "topic1:10:1,topic2:10:1,topic3:10:1,topic4:10:1,topic5:10:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
